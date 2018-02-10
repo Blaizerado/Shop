@@ -1,0 +1,18 @@
+name: Durchchillen
+version: 1337
+description: Durchchillen
+author: Unknown
+main: de.unknown.main.Lobby
+depend: [ProtocolLib,PermissionsEx]
+commands:
+  dcteleports:
+    aliases: dct
+    usage: |
+      Usage:
+      /<command> - Display help
+      /<command> list - List teleports
+      /<command> add <name> - Add a teleport
+      /<command> del <name> - Delete a teleport
+      /<command> test <name> - Test a teleport
+  dcreload:
+  cc:
