@@ -1,4 +1,4 @@
-package moduls.holo;
+package modul.holo;
 
 import java.io.File;
 

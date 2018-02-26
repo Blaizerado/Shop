@@ -16,8 +16,8 @@ import com.sk89q.worldedit.bukkit.selections.Selection;
 import de.unknown.main.Shop;
 import modul.Utils.RegionUtil;
 import modul.create.CreatShop;
-import moduls.holo.Holo;
-import moduls.holo.loadholos;
+import modul.holo.Holo;
+import modul.holo.loadholos;
 
 public class Shops implements CommandExecutor {
 	
