@@ -1,0 +1,9 @@
+main: de.unknown.main.Shop
+name: UserShop
+version: 0.1
+author: UK
+
+commands:
+     shop:
+          description: Shows MySQL Information
+          usage: </command>
