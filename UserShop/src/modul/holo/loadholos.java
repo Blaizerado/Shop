@@ -19,7 +19,6 @@ public class loadholos {
 		this.main = shop;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void loadHolo() {
 		File configs = new File("plugins/UserShop/shops", "config.cfg");
 		YamlConfiguration cfg1 = YamlConfiguration.loadConfiguration(configs);
@@ -30,14 +29,11 @@ public class loadholos {
 			if(f.exists()) {
 				if(!cfg.getString("Config.Display").equalsIgnoreCase("default")) {
 					Location loc = (Location) cfg.get("Config.Display");
-					String Owner = cfg.getString("Config.Owner");
+					String Owner = cfg.getString("Config.Ownername").replace("default", "Frei");
 					Integer Preis = cfg.getInt("Config.Price");
-					Owner = Owner.replace("default", "Frei");
-					Owner = Bukkit.getOfflinePlayer(Owner).getName();
 					
-					String Name = cfg.getString("Config.Name");
-					String[] text = {"§cDieser Shop gehört: §e" + Owner, "§cName des Shops: §e" + Name, "§cPreis: §e" + Preis+"$"};
-					Holo h = new Holo(text, loc);
+					String[] text = {"§cDieser Shop gehört: §e" + Owner, "§cName des Shops: §e" + cfg.getString("Config.Name"), "§cPreis: §e" + Preis+"$"};
+					holo h = new holo(text, loc);
 					h.showAll();
 				}
 			}else {}
@@ -50,13 +46,13 @@ public class loadholos {
 		YamlConfiguration cfg = YamlConfiguration.loadConfiguration(f);
 		if(f.exists()) {
 			Location loc = (Location) cfg.get("Config.Display");
-			String Owner = cfg.getString("Config.Owner");
+			String Owner = cfg.getString("Config.Ownername").replace("default", "Frei");
 			Integer Preis = cfg.getInt("Config.Price");
 			Owner = Owner.replace("default", "Frei");
 			Owner = Bukkit.getOfflinePlayer(Owner).getName();
 			String[] text = {"§cDieser Shop gehört: §e" + Owner, "§cName des Shops: §e" + Name, "§cPreis: §e" + Preis+"$"};
 			
-			Holo h = new Holo(text, loc);
+			holo h = new holo(text, loc);
 			h.showAll();
 			p.sendMessage(Shop.prefix + "Der Display für den Shop §e" + Name + "§7 wurde erstellt!");
 		}else {p.sendMessage(Shop.prefix + "§cAchtung der Shop §e" + Name + "§c ist nicht erstellt!");}

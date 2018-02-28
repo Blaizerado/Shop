@@ -14,7 +14,7 @@ import net.minecraft.server.v1_8_R3.EntityArmorStand;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
 import net.minecraft.server.v1_8_R3.PacketPlayOutSpawnEntityLiving;
 
-public class Holo {
+public class holo {
 
 		 
         private static List<EntityArmorStand> entitylist = new ArrayList<EntityArmorStand>();
@@ -24,14 +24,14 @@ public class Holo {
         int count;
 		private Shop main;
  
-        public Holo(String[] Text, Location location) {
+        public holo(String[] Text, Location location) {
                 this.Text = Text;
                 this.location = location;
                 create();
         }
  
        
-        public Holo(Shop shop) {
+        public holo(Shop shop) {
 			this.main = shop;
 		}
 
@@ -87,8 +87,13 @@ public class Holo {
                                 ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
                         }
                 }
+                clearList();
         }
  
+        public static void clearList() {
+        	entitylist.clear();
+        }
+        
         private void create() {
                 for (String Text : this.Text) {
                         EntityArmorStand entity = new EntityArmorStand(((CraftWorld) this.location.getWorld()).getHandle(),this.location.getX(), this.location.getY(),this.location.getZ());

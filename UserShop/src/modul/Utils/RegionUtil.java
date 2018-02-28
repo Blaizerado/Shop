@@ -91,7 +91,7 @@ public class RegionUtil {
 		return false;
 	}
 	
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access", "deprecation" })
 	public static void getRegionInfo(Location loc, Player p) {
 		File configs = new File(main.getDataFolder().getPath()+"/shops", "config.cfg");
 		YamlConfiguration cfg1 = YamlConfiguration.loadConfiguration(configs);
@@ -119,12 +119,11 @@ public class RegionUtil {
 					if((( x1 <= loc.getX() && x2 >= loc.getX()) || (x1 >= loc.getX() && x2 <= loc.getX())) && (( y1 <= loc.getY() && y2 >= loc.getY()) || (y1 >= loc.getY() && y2 <= loc.getY())) &&
 							(( z1 <= loc.getZ() && z2 >= loc.getZ()) || (z1 >= loc.getZ() && z2 <= loc.getZ()))){
 						
-						String owner = cfg.getString("Config.Owner");
 						Integer price = cfg.getInt("Config.Price");
 						Integer umsatzt = cfg.getInt("Config.Umsatzt");
 						Integer schulden = cfg.getInt("Config.Schulden");
 						String create = cfg.getString("Config.Create");
-						p.sendMessage(main.prefix + "Besitzer: §3" + owner);
+						p.sendMessage(main.prefix + "Besitzer: §3" + Bukkit.getOfflinePlayer(cfg.getString("Config.Ownername")).getName());
 						p.sendMessage(main.prefix + "Shop: §3" + s);
 						p.sendMessage(main.prefix + "Preis: §3" + price);
 						p.sendMessage(main.prefix + "Umsatzt: §3" + umsatzt);
@@ -174,7 +173,6 @@ public class RegionUtil {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static String getRegion(Player p) {
 		String region = null;
 		File configs = new File(main.getDataFolder().getPath()+"/shops", "config.cfg");
@@ -187,7 +185,6 @@ public class RegionUtil {
 			YamlConfiguration cfg = YamlConfiguration.loadConfiguration(f);
 			if(f.exists()) {
 				String world = cfg.getString("Config.Location.world");
-				String owner = cfg.getString("Config.User");
 				int x1 = cfg.getInt("Config.Location.x1");
 				int y1 = cfg.getInt("Config.Location.y1");
 				int z1 = cfg.getInt("Config.Location.z1");
@@ -213,7 +210,6 @@ public class RegionUtil {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static boolean isUserOwner(Player p) {
 		
 		File configs = new File(main.getDataFolder().getPath()+"/shops", "config.cfg");
@@ -243,7 +239,7 @@ public class RegionUtil {
 							&& y2 <= p.getLocation().getY())) &&
 							(( z1 <= p.getLocation().getZ() && z2 >= p.getLocation().getZ()) || (z1 >= p.getLocation().getZ() && z2 <= p.getLocation().getZ()))){
 						
-						if(!owner.equalsIgnoreCase("default") || Bukkit.getOfflinePlayer(owner).getUniqueId().toString().equalsIgnoreCase(p.getUniqueId().toString())) {
+						if(owner.toString().equalsIgnoreCase(p.getUniqueId().toString())) {
 							return true;
 						}
 					}
@@ -252,6 +248,44 @@ public class RegionUtil {
 		}
 		
 		return false;
+		
+	}
+	
+    public static List<String> getUser(Player p) {
+		
+		File configs = new File(main.getDataFolder().getPath()+"/shops", "config.cfg");
+		YamlConfiguration cfg1 = YamlConfiguration.loadConfiguration(configs);
+		List<String>User = null;
+		List<String>Shops = cfg1.getStringList("Config.shops");
+		
+		for(String s : Shops) {
+			File f = new File(main.getDataFolder().getPath()+"/shops", s+".cfg");
+			YamlConfiguration cfg = YamlConfiguration.loadConfiguration(f);
+			if(f.exists()) {
+				String world = cfg.getString("Config.Location.world");
+				int x1 = cfg.getInt("Config.Location.x1");
+				int y1 = cfg.getInt("Config.Location.y1");
+				int z1 = cfg.getInt("Config.Location.z1");
+				
+				
+				int x2 = cfg.getInt("Config.Location.x2");
+				int y2 = cfg.getInt("Config.Location.y2");
+				int z2 = cfg.getInt("Config.Location.z2");
+				
+				
+				if(p.getLocation().getWorld().getName().equalsIgnoreCase(world)) {
+					if((( x1 <= p.getLocation().getX() && x2 >= p.getLocation().getX()) || (x1 >= p.getLocation().getX() && 
+							x2 <= p.getLocation().getX())) && (( y1 <= p.getLocation().getY() && y2 >= p.getLocation().getY()) || (y1 >= p.getLocation().getY() 
+							&& y2 <= p.getLocation().getY())) &&
+							(( z1 <= p.getLocation().getZ() && z2 >= p.getLocation().getZ()) || (z1 >= p.getLocation().getZ() && z2 <= p.getLocation().getZ()))){
+						
+						User = cfg.getStringList("Config.User");
+					}
+				}
+			}
+		}
+		
+		return User;
 		
 	}
 	

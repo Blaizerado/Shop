@@ -12,17 +12,17 @@ import org.bukkit.entity.Player;
 
 import de.unknown.main.Shop;
 
-public class CreatShop {
+public class creatShop {
 
 	private static Shop main;
 
 	@SuppressWarnings("static-access")
-	public CreatShop(Shop shop) {
+	public creatShop(Shop shop) {
 		this.main = shop;
 	}
 
 	public static void create(Player p,String name, Location loc, Location loc1, World world) {
-		File f = new File(main.getDataFolder().getPath()+"/shops", name+".cfg");
+		File f = new File("plugins/UserShop/shops", name+".cfg");
 		YamlConfiguration cfg = YamlConfiguration.loadConfiguration(f);
 		
 		File configs = new File(main.getDataFolder().getPath()+"/shops", "config.cfg");
@@ -58,13 +58,14 @@ public class CreatShop {
 			cfg.set("Config.Schulden", 0);
 			cfg.set("Config.Display", "default");
 			cfg.set("Config.Create", df.format(new Date().getTime()));
+			cfg.set("Config.Ownername", "default");
 			p.sendMessage(Shop.prefix + "Der Shop §c" + name + "§7 wurde erstellt!");
 			try {cfg.save(f);}catch(Exception e) {}
 		}else {p.sendMessage(Shop.prefix + "§cDer Shop §e" + name + "§c ist bereits vorhanden!");}
 	}
 	
 	public static void setDisplay(Player p, String name) {
-		File f = new File(main.getDataFolder().getPath()+"/shops", name+".cfg");
+		File f = new File("plugins/UserShop/shops", name+".cfg");
 		YamlConfiguration cfg = YamlConfiguration.loadConfiguration(f);
 		if(f.exists()) {
 			cfg.set("Config.Display", p.getLocation());
