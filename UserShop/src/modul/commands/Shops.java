@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -233,8 +232,8 @@ public class Shops implements CommandExecutor {
 						if(Price >= 1 && Price <= 1000000 ) {
 							creatShop.setPrice(p, Name, Price);
 						}else {p.sendMessage(Shop.prefix +"§cAchtung der Preis muss zwischen 1-1000000 liegen!"); return true;}
+					}else {p.sendMessage(Shop.prefix + "§cDu bist in keinen Shop!"); return true;}
 					}else {p.sendMessage(Shop.prefix + "§cDer Zugriff auf diesen Command wurde verweigert!"); return true;}
-					}else {p.sendMessage(main.prefix + "§cDu bist in keinen Shop!"); return true;}
 			}else if(args[0].equalsIgnoreCase("user")) {
 				if(args[1].equalsIgnoreCase("add")) {
 					String User = args[2];

@@ -59,7 +59,6 @@ public class holo {
                 for (EntityArmorStand armor : entitylist) {
                         PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving(armor);
                         ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
-                        System.out.println(armor);
                 }
         }
  
@@ -104,7 +103,6 @@ public class holo {
                         entitylist.add(entity);
                         this.location.subtract(0, this.DISTANCE, 0);
                         count++;
-                        System.out.println("Hologramm create");
                 }
  
                 for (int i = 0; i < count; i++) {
